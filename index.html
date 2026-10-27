@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integración Numérica | Desafío 19–27</title>
+  <link rel="stylesheet" href="a.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="tag">MÉTODOS NUMÉRICOS · UMSA</div>
+      <h1>Integración Numérica</h1>
+      <p>Desafío aplicado a problemas de La Paz, Bolivia · Ejercicios 19 al 27</p>
+      <div class="hero-stats">
+        <span>Trapecio compuesto</span><span>Simpson 1/3</span><span>Simpson 3/8</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel selector-panel">
+      <div class="section-heading">
+        <div><span class="eyebrow">PASO 1</span><h2>Selecciona el ejercicio</h2></div>
+        <span class="number-pill">19 — 27</span>
+      </div>
+      <label for="ejercicio">Ejercicio del desafío</label>
+      <select id="ejercicio">
+        <option value="19">19 · Distancia de un vehículo</option>
+        <option value="20">20 · Trabajo de una banda elástica</option>
+        <option value="21">21 · Área de un perfil topográfico</option>
+        <option value="22">22 · Longitud de una catenaria</option>
+        <option value="23">23 · Caudal de una tubería</option>
+        <option value="24">24 · Longitud de una cardioide</option>
+        <option value="25">25 · Energía potencial gravitatoria</option>
+        <option value="26">26 · Superficie de un lago</option>
+        <option value="27">27 · Volumen de un objeto alargado</option>
+      </select>
+      <div class="exercise-info" id="descripcion"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading">
+        <div><span class="eyebrow">PASO 2</span><h2>Datos de entrada</h2></div>
+        <button class="btn btn-light" id="restaurar" type="button">Restaurar datos</button>
+      </div>
+      <p class="help">Puedes modificar los valores de la tabla. Escribe los valores separados por comas, manteniendo la misma cantidad de datos de x e y.</p>
+      <div class="input-grid">
+        <div class="field">
+          <label for="valoresX">Valores de x (o variable independiente)</label>
+          <textarea id="valoresX" rows="3" spellcheck="false"></textarea>
+        </div>
+        <div class="field">
+          <label for="valoresY">Valores de y (o integrando)</label>
+          <textarea id="valoresY" rows="3" spellcheck="false"></textarea>
+        </div>
+      </div>
+      <div class="input-grid small-grid">
+        <div class="field">
+          <label for="metodo">Método de integración</label>
+          <select id="metodo">
+            <option value="todos">Comparar todos los métodos posibles</option>
+            <option value="trapecio">Trapecio compuesto</option>
+            <option value="simpson13">Simpson 1/3</option>
+            <option value="simpson38">Simpson 3/8</option>
+            <option value="auto">Simpson combinado automático</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="unidad">Unidad del resultado</label>
+          <input id="unidad" type="text" value="unidades">
+        </div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-primary" id="calcular" type="button">Calcular integral <span>→</span></button>
+        <button class="btn btn-outline" id="prueba" type="button">Probar f(x) = x²</button>
+      </div>
+      <div id="mensaje" class="message" role="status"></div>
+    </section>
+
+    <section class="results-section" id="resultados" hidden>
+      <div class="section-heading">
+        <div><span class="eyebrow">PASO 3</span><h2>Resultados del cálculo</h2></div>
+      </div>
+      <div class="result-cards" id="tarjetas"></div>
+      <div class="panel">
+        <h3>Tabla de cálculo y pesos</h3>
+        <p class="help">Los pesos mostrados corresponden al método de trapecio compuesto para visualizar cómo contribuye cada dato.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>i</th><th>xᵢ</th><th>yᵢ</th><th>Peso trapecio</th><th>Contribución</th></tr></thead>
+            <tbody id="tablaDatos"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel chart-panel">
+        <div class="section-heading"><div><h3>Gráfica de los datos</h3><p class="help">Representación de los puntos ingresados y el área aproximada.</p></div></div>
+        <canvas id="grafica" height="115"></canvas>
+      </div>
+      <div class="panel" id="interpretacion"></div>
+    </section>
+
+    <section class="panel reference-panel">
+      <h2>Formulario rápido</h2>
+      <div class="formula-grid">
+        <div><strong>Trapecio compuesto</strong><code>T = h [(y₀ + yₙ)/2 + Σyᵢ]</code><small>Se aplica con nodos igualmente espaciados.</small></div>
+        <div><strong>Simpson 1/3</strong><code>S = h/3 [y₀ + yₙ + 4Σ impar + 2Σ par]</code><small>El número de subintervalos debe ser par.</small></div>
+        <div><strong>Simpson 3/8</strong><code>S = 3h/8 [y₀ + yₙ + 3Σ + 2Σ]</code><small>El número de subintervalos debe ser múltiplo de 3.</small></div>
+      </div>
+      <p class="disclaimer">Nota: los datos del desafío son adaptaciones didácticas. En el ejercicio 26, el documento no proporciona una tabla oficial de anchuras, por lo que debes ingresar tus mediciones.</p>
+    </section>
+  </main>
+  <footer>Aplicación educativa · Integración numérica · HTML, CSS y JavaScript</footer>
+  <script src="a.js"></script>
+</body>
+</html>
